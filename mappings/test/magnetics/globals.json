@@ -1,0 +1,7 @@
+{
+  "PLUGIN_ARGS": {
+    "TEST": {
+      "source": "{{ shot }}"
+    }
+  }
+}
