@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "tokamap-validator"
 version = "0.1.0"
@@ -9,12 +13,12 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = ["jsonschema (>=4.25.0,<5.0.0)"]
 
-[tool.poetry]
-packages = [{ include = "tokamap_validator", from = "src" }]
+[project.scripts]
+tokamap_validator = "tokamap_validator.main:run"
 
-[tool.poetry.scripts]
-validator = "tokamap_validator.main:run"
+[tool.setuptools.package-data]
+"*" = ["*.json"]
 
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+[project.urls]
+"Homepage" = "https://github.com/ukaea/tokamap"
+"Issue Tracker" = "https://github.com/ukaea/tokamap/issues"
