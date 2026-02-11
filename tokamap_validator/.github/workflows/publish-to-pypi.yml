@@ -1,0 +1,137 @@
+name: Publish to PyPI
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to publish to"
+        required: true
+        type: choice
+        options:
+          - testpypi
+          - pypi
+
+jobs:
+  build:
+    name: Build distribution
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Check package
+        run: python -m twine check dist/*
+
+      - name: List distribution files
+        run: |
+          echo "Distribution files:"
+          ls -lh dist/
+
+      - name: Verify schema files in wheel
+        run: |
+          echo "Checking wheel contents..."
+          unzip -l dist/*.whl | grep schemas || (echo "ERROR: Schema files not found in wheel!" && exit 1)
+
+      - name: Store distribution packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+  publish-to-testpypi:
+    name: Publish to TestPyPI
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'testpypi'
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/project/tokamap-validator/
+
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+
+  publish-to-pypi:
+    name: Publish to PyPI
+    if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'pypi')
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: pypi
+      url: https://pypi.org/project/tokamap-validator/
+
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  verify-installation:
+    name: Verify installation
+    needs: publish-to-pypi
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Wait for PyPI to update
+        run: sleep 30
+
+      - name: Install from PyPI
+        run: |
+          pip install tokamap-validator
+
+      - name: Verify version command
+        run: |
+          tokamap-validator --version
+
+      - name: Verify help command
+        run: |
+          tokamap-validator --help
+
+      - name: Verify package can be imported
+        run: |
+          python -c "import tokamap_validator; print('Package imported successfully')"
+
+      - name: Verify schema files are accessible
+        run: |
+          python -c "import os; import tokamap_validator; schema_dir = os.path.join(os.path.dirname(tokamap_validator.__file__), 'schemas'); print(f'Schema directory: {schema_dir}'); print(f'Exists: {os.path.exists(schema_dir)}'); print(f'Files: {os.listdir(schema_dir) if os.path.exists(schema_dir) else []}')"

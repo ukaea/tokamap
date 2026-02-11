@@ -3,22 +3,53 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tokamap-validator"
+name = "tokamap"
 version = "0.1.0"
-description = ""
+description = "A JSON schema-based validator for TokaMap experimental data mapping configurations"
 authors = [
     { name = "Jonathan Hollocombe", email = "jonathan.hollocombe@ukaea.uk" },
 ]
 readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.13"
-dependencies = ["jsonschema (>=4.25.0,<5.0.0)"]
+dependencies = [
+    "jsonschema>=4.25.0,<5.0.0",
+]
+keywords = [
+    "tokamap",
+    "validation",
+    "schema",
+    "experimental-data",
+    "data-mapping",
+    "json-schema",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
 
 [project.scripts]
-tokamap_validator = "tokamap_validator.main:run"
-
-[tool.setuptools.package-data]
-"*" = ["*.json"]
+tokamap-validator = "tokamap_validator.main:run"
 
 [project.urls]
 "Homepage" = "https://github.com/ukaea/tokamap"
+"Repository" = "https://github.com/ukaea/tokamap"
 "Issue Tracker" = "https://github.com/ukaea/tokamap/issues"
+"Documentation" = "https://github.com/ukaea/tokamap#readme"
+
+[tool.setuptools]
+packages = ["tokamap_validator"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.package-data]
+"tokamap_validator" = ["schemas/*.json"]
