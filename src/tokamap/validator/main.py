@@ -3,7 +3,7 @@ import json
 import os
 from pathlib import Path
 
-from . import __version__
+from .. import __version__
 from .validate import Validator
 
 

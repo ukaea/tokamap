@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tokamap"
-version = "0.1.0"
-description = "A JSON schema-based validator for TokaMap experimental data mapping configurations"
+version = "0.2.0"
+description = "A JSON schema-based framework for mapping and structuring experimental data"
 authors = [
     { name = "Jonathan Hollocombe", email = "jonathan.hollocombe@ukaea.uk" },
 ]
@@ -37,7 +37,8 @@ classifiers = [
 ]
 
 [project.scripts]
-tokamap-validator = "tokamap_validator.main:run"
+tokamap = "tokamap.main:run"
+tokamap-validator = "tokamap.validator.main:run"
 
 [project.urls]
 "Homepage" = "https://github.com/ukaea/tokamap"
@@ -46,10 +47,10 @@ tokamap-validator = "tokamap_validator.main:run"
 "Documentation" = "https://github.com/ukaea/tokamap#readme"
 
 [tool.setuptools]
-packages = ["tokamap_validator"]
+packages = ["tokamap"]
 
 [tool.setuptools.package-dir]
 "" = "src"
 
 [tool.setuptools.package-data]
-"tokamap_validator" = ["schemas/*.json"]
+"tokamap" = ["schemas/*.json"]
