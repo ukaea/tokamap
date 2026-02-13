@@ -1,4 +1,4 @@
-"""TokaMap Validator - A JSON schema-based validator for TokaMap experimental data mapping configurations."""
+"TokaMap - A JSON schema-based framework for mapping and structuring experimental data"
 
 __author__ = "Jonathan Hollocombe"
 __email__ = "jonathan.hollocombe@ukaea.uk"
@@ -16,3 +16,10 @@ try:
 except ImportError:
     # Fallback for Python < 3.8 (though we require 3.13+)
     __version__ = "0.0.0-dev"
+
+
+def schemas_dir():
+    """Return the directory containing the schemas"""
+    from pathlib import Path
+
+    return Path(__file__).parent / "schemas"
