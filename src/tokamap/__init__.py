@@ -5,8 +5,6 @@ __email__ = "jonathan.hollocombe@ukaea.uk"
 
 # Read version from package metadata (installed package)
 # This ensures version is only defined in pyproject.toml
-from sys import implementation
-
 try:
     from importlib.metadata import PackageNotFoundError, version
 
