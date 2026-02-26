@@ -37,6 +37,11 @@ theme:
 
 nav:
   - Home: index.md
+  - Schemas:
+      - Schema: schemas/schema.md
+      - Mapping Types: schemas/mapping_types.md
+  - Validator: validator.md
+  - Library: python.md
 
 markdown_extensions:
   - admonition
