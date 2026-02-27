@@ -45,11 +45,8 @@ tokamap-validator = "tokamap.validator.main:run"
 "Issue Tracker" = "https://github.com/ukaea/tokamap/issues"
 "Documentation" = "https://github.com/ukaea/tokamap#readme"
 
-[tool.setuptools]
-packages = ["tokamap"]
-
-[tool.setuptools.package-dir]
-"" = "src"
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.setuptools.package-data]
 "tokamap" = ["schemas/*.json"]
