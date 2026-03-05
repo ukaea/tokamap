@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../globals/">
       
       
-        <link rel="next" href="../config/">
+        <link rel="next" href="../../python/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Schema - TokaMap</title>
+        <title>Mappings - TokaMap</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#schema-structure" class="md-skip">
+        <a href="#mappings" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Schema
+              Mappings
             
           </span>
         </div>
@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../schema/" class="md-tabs__link">
           
   
   
@@ -413,37 +413,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Schema
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../schema/" class="md-nav__link">
         
   
   
@@ -459,37 +432,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#directory-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Directory Structure
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -555,10 +497,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../mappings/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mappings
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -574,6 +543,109 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syntactic-sugar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syntactic sugar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapping-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapping types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mapping types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#value-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Value Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dimension-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimension Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-source-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Source Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expression-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expression Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-function-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Function Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -640,13 +712,85 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#directory-structure" class="md-nav__link">
+  <a href="#syntactic-sugar" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Directory Structure
+        Syntactic sugar
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapping-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapping types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mapping types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#value-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Value Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dimension-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimension Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-source-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Source Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expression-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expression Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-function-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Function Mapping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -667,28 +811,137 @@
 
 
 
-<h1 id="schema-structure">Schema Structure<a class="headerlink" href="#schema-structure" title="Permanent link">&para;</a></h1>
-<p>The TokaMap system consists of three main schema components:</p>
-<ul>
-<li><a href="../config/">Configuration Schema</a> (<code>mappings.cfg.schema.json</code>): Defines the top-level configuration structure
-including.</li>
-<li><a href="../globals/">Globals Schema</a> (<code>globals.schema.json</code>): Defines global configuration settings, particularly data
-source configurations with their associated arguments.</li>
-<li><a href="../mappings/">Mappings Schema</a> (<code>mappings.schema.json</code>): Defines the structure for mapping experimental data with
-five main mapping types.</li>
-</ul>
-<h2 id="directory-structure">Directory Structure<a class="headerlink" href="#directory-structure" title="Permanent link">&para;</a></h2>
-<p>A typical TokaMap project follows this structure:</p>
-<div class="highlight"><pre><span></span><code>mapping_root/
-├── mappings.cfg.json          # Main configuration file
-├── globals.json               # Global settings
-├── mapping_group_1/
-│   ├── globals.json           # Group-specific globals
-│   └── mappings.json          # Group mappings
-└── mapping_group_2/
-    ├── globals.json
-    └── mappings.json
+<h1 id="mappings">Mappings<a class="headerlink" href="#mappings" title="Permanent link">&para;</a></h1>
+<p>The mappings file contains a dictionary of <code>mapping_key</code>s to mapping values, where each one is defined as:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;mapping_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;map_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="err">...</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="err">...</span>
+<span class="p">}</span>
 </code></pre></div>
+<p>Each mapping must contain a <code>map_type</code> with one of the following values:</p>
+<ul>
+<li><strong>DIMENSION</strong>: Extract the dimensionality of another mapping</li>
+<li><strong>VALUE</strong>: A static value defined in the mapping files</li>
+<li><strong>DATA_SOURCE</strong>: Call an external data source to return the data</li>
+<li><strong>EXPR</strong>: Evaluate a mathematical expression with inputs from other mappings</li>
+<li><strong>CUSTOM</strong>: Call a custom function defined in a library</li>
+</ul>
+<p>More details for each type, along with the required extra values, are given below.</p>
+<h2 id="syntactic-sugar">Syntactic sugar<a class="headerlink" href="#syntactic-sugar" title="Permanent link">&para;</a></h2>
+<p>To reduce boilerplate for <code>VALUE</code> mappings, these can be defined as:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;string_mapping&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;integer_mapping&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;float_mapping&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.14</span><span class="p">,</span>
+<span class="w">  </span><span class="err">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>These mappings are equivalent to the verbose syntax, i.e.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;string_mapping&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="err">...</span>
+<span class="p">}</span>
+
+<span class="err">&lt;=&gt;</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;string_mapping&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;map_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VALUE&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="err">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="mapping-types">Mapping types<a class="headerlink" href="#mapping-types" title="Permanent link">&para;</a></h2>
+<p>Each map type has required extra parameters.</p>
+<p>The <code>comment</code> parameter can be provided for any map type but is always optional. This parameter allow for documentation
+of the mapping as JSON does not support comments.</p>
+<h3 id="value-mapping">Value Mapping<a class="headerlink" href="#value-mapping" title="Permanent link">&para;</a></h3>
+<p>Return a static value defined in the mapping files.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;map_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VALUE&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;any_value_type&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Optional description&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>value</code>: The static value to return.</li>
+</ul>
+<h3 id="dimension-mapping">Dimension Mapping<a class="headerlink" href="#dimension-mapping" title="Permanent link">&para;</a></h3>
+<p>Extract the dimensionality of another mapping. Currently only the length of the first dimension can be returned.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;map_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DIMENSION&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;dim_probe&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;probe_identifier&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Optional description&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>dim_probe</code>: The key of the mapping to extract the dimensionality from.</li>
+</ul>
+<h3 id="data-source-mapping">Data Source Mapping<a class="headerlink" href="#data-source-mapping" title="Permanent link">&para;</a></h3>
+<p>Use an external data source to read the values to return.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;map_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DATA_SOURCE&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data_source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source_name&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;arg1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;arg2&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;slice&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[0:10]&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Optional description&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>data_source</code>: The name of the data source to use to read the data.</li>
+<li><code>args</code>: A dictionary of arguments to pass to the data source reader.</li>
+<li><code>offset</code> (optional): A postprocessing offset value to apply to the data.</li>
+<li><code>scale</code> (optional): A postprocessing scale factior to apply to the data.</li>
+<li><code>slice</code> (optional): Postprocessing slicing of the returned data.</li>
+</ul>
+<h3 id="expression-mapping">Expression Mapping<a class="headerlink" href="#expression-mapping" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;map_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EXPR&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;expr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mathematical_expression&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;param1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value1&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Optional description&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>expr</code>: A mathematical expression to evaluate.</li>
+<li><code>parameters</code>: A dictionary of parameters to pass into the expression.</li>
+</ul>
+<h3 id="custom-function-mapping">Custom Function Mapping<a class="headerlink" href="#custom-function-mapping" title="Permanent link">&para;</a></h3>
+<p>If functionality is required that can be handled by any of the other mapping types then you can offload to a custom 
+function that you expect to be available to run your mappings.</p>
+<p>This should be used as a last resort and if you believe the functionality should be generally available please raise an
+issue to request a new mapping type or extension to the current ones.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;map_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CUSTOM&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;library&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;library_name&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;function&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;function_name&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;input1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value1&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Optional description&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>library</code>: The name of the library of custom functionality.</li>
+<li><code>function</code>: The function within the library to call.</li>
+<li><code>inputs</code>: A dictionary of inputs to the function - either static values or other the results of other mappings.</li>
+</ul>
 
 
 
