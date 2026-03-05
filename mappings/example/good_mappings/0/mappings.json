@@ -1,0 +1,37 @@
+{
+  "string_value_mapping": "value",
+  "integer_value_mapping": 42,
+  "float_value_mapping": 3.14,
+  "array_value_mapping": {
+    "map_type": "VALUE",
+    "value": [1, 2, 3, 4, 5]
+  },
+  "data_source_mapping": {
+    "map_type": "DATA_SOURCE",
+    "data_source": "MyDataSource",
+    "args": {
+      "signal": "coils"
+    }
+  },
+  "dimension_mapping": {
+    "map_type": "DIMENSION",
+    "dim_probe": "data_source_mapping"
+  },
+  "expression_mapping": {
+    "map_type": "EXPR",
+    "expr": "pi * r^2",
+    "parameters": {
+      "r": "float_value_mapping"
+    }
+  },
+  "custom_function_mapping": {
+    "map_type": "CUSTOM",
+    "library": "custom",
+    "function": "dot_product",
+    "inputs": {
+      "lhs": "data_source_mapping",
+      "rhs": "data_source_mapping"
+    },
+    "parameters": {}
+  }
+}
