@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../schemas/mappings/">
+        <link rel="prev" href="../validator/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Python - TokaMap</title>
+        <title>Library - TokaMap</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#python-library" class="md-skip">
+        <a href="#installation" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Python
+              Library
             
           </span>
         </div>
@@ -274,6 +274,25 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../validator/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Validator
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
     
   
   
@@ -284,7 +303,7 @@
   
     
   
-  Python
+  Library
 
       </a>
     </li>
@@ -439,70 +458,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../schemas/config/" class="md-nav__link">
+      <a href="../schemas/mapping_types/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Config
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../schemas/globals/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Globals
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../schemas/mappings/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Mappings
+    Mapping Types
   
 
     
@@ -527,6 +490,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../validator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -536,8 +526,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -546,7 +534,7 @@
   <span class="md-ellipsis">
     
   
-    Python
+    Library
   
 
     
@@ -564,7 +552,7 @@
   <span class="md-ellipsis">
     
   
-    Python
+    Library
   
 
     
@@ -579,8 +567,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -647,34 +633,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Validation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -703,8 +661,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -773,34 +729,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Validation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -818,13 +746,8 @@
 
 
 
-<h1 id="python-library">Python library<a class="headerlink" href="#python-library" title="Permanent link">&para;</a></h1>
-<p>The Python package contains the following components:</p>
-<ul>
-<li><code>tokamap</code>: The top level module that provides details about the install as well as a simple CLI.</li>
-<li><code>tokamap.validator</code>: Validation module for ensuring consistency and correctness of mappings.</li>
-</ul>
-<p>The schemas as also installed as package data, with the location available via the Python library or a simple CLI tool.</p>
+  <h1>Library</h1>
+
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <h3 id="from-pypi">From PyPI<a class="headerlink" href="#from-pypi" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>tokamap
@@ -834,8 +757,6 @@
 pip<span class="w"> </span>install<span class="w"> </span>.
 </code></pre></div>
 <h2 id="tokamap-cli">TokaMap CLI<a class="headerlink" href="#tokamap-cli" title="Permanent link">&para;</a></h2>
-<p>The TokaMap library comes with a command-line tool that provides functionality to query details about the schema install,
-such as the location of the schemas.</p>
 <p>Finding the schemas directory:</p>
 <div class="highlight"><pre><span></span><code>tokamap<span class="w"> </span>--schemas-dir
 </code></pre></div>
@@ -853,24 +774,6 @@ such as the location of the schemas.</p>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">__version__</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<p>TokaMap includes a Python validator tool to ensure your mapping files conform to the schemas.</p>
-<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
-<p>Validate a TokaMap mapping directory:</p>
-<div class="highlight"><pre><span></span><code>tokamap-validator<span class="w"> </span>/path/to/mapping/directory
-</code></pre></div>
-<p>For verbose output:</p>
-<div class="highlight"><pre><span></span><code>tokamap-validator<span class="w"> </span>-v<span class="w"> </span>/path/to/mapping/directory
-</code></pre></div>
-<p>Check the installed version:</p>
-<div class="highlight"><pre><span></span><code>tokamap-validator<span class="w"> </span>--version
-</code></pre></div>
-<p>The validator will:</p>
-<ol>
-<li>Check that the configuration file (<code>mappings.cfg.json</code>) exists and is valid</li>
-<li>Validate the top-level globals file</li>
-<li>Validate each mapping group's globals and mappings files</li>
-</ol>
 
 
 
