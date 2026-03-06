@@ -278,32 +278,13 @@
   
   
     <li class="md-tabs__item">
-      <a href="validator/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  Validator
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
       <a href="python/" class="md-tabs__link">
         
   
   
     
   
-  Library
+  Python
 
       </a>
     </li>
@@ -413,6 +394,17 @@
     <span class="md-ellipsis">
       
         Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python library
       
     </span>
   </a>
@@ -549,14 +541,70 @@
   
   
     <li class="md-nav__item">
-      <a href="schemas/mapping_types/" class="md-nav__link">
+      <a href="schemas/config/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Mapping Types
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="schemas/globals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Globals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="schemas/mappings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mappings
   
 
     
@@ -584,33 +632,6 @@
   
   
     <li class="md-nav__item">
-      <a href="validator/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Validator
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="python/" class="md-nav__link">
         
   
@@ -618,7 +639,7 @@
   <span class="md-ellipsis">
     
   
-    Library
+    Python
   
 
     
@@ -662,6 +683,17 @@
     <span class="md-ellipsis">
       
         Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python library
       
     </span>
   </a>
@@ -719,12 +751,7 @@
 
 
 <h1 id="tokamap">TokaMap<a class="headerlink" href="#tokamap" title="Permanent link">&para;</a></h1>
-<p>TokaMap is a JSON schema-based framework for mapping and structuring experimental data. It provides a standardized way to define how experimental measurements, calculations, and data transformations should be organized and validated.</p>
-<p>The Python package contains the following components:</p>
-<ul>
-<li><a href="python/">tokamap</a>: A module that provides details about the install, such as the schemas directory.</li>
-<li><a href="validator/">tokamap_validator</a>: A validation tool for ensuring consistency and correctness of mappings.</li>
-</ul>
+<p>TokaMap is a JSON schema-based framework for mapping experimental data. It provides a standardized way to define how experimental measurements, calculations, and data transformations should be organized and validated.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>TokaMap defines a set of JSON schemas that allow researchers and engineers to:</p>
 <ul>
@@ -735,13 +762,20 @@
 <li><strong>Validate mappings</strong> to ensure data consistency and correctness</li>
 </ul>
 <p>Details of the schema structure can be found in the <a href="schemas/schema/">schemas</a> section.</p>
+<h2 id="python-library">Python library<a class="headerlink" href="#python-library" title="Permanent link">&para;</a></h2>
+<p>A Python package is available that installs the schemas alongside a few usage tools:</p>
+<ul>
+<li><code>tokamap</code>: A CLI that provides details about the install, such as the schemas directory.</li>
+<li><code>tokamap-validator</code>: A validation tool for ensuring consistency and correctness of mappings.</li>
+</ul>
+<p>More details about the provided library and tools can be found in the <a href="python/">python</a> section.</p>
 <h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Create a configuration file</strong> (<code>mappings.cfg.json</code>) with your experiment metadata:</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;experiment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your_experiment_name&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;experiment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;experiment_name&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;author&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Your Name&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span>
 <span class="w">  </span><span class="p">},</span>
@@ -754,6 +788,7 @@
 <span class="w">  </span><span class="nt">&quot;groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;group1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;group2&quot;</span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>More details can be found in the <a href="schemas/config/">config</a> section.</p>
 <ol>
 <li><strong>Define global settings</strong> in <code>globals.json</code>:</li>
 </ol>
@@ -767,14 +802,43 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<p>More details can be found in the <a href="schemas/globals/">globals</a> section.</p>
 <ol>
-<li>
-<p><strong>Create mapping directories</strong> for each group with their respective <code>mappings.json</code> and <code>globals.json</code> files.</p>
-</li>
-<li>
-<p><strong>Validate your configuration</strong> using the TokaMap validator.</p>
-</li>
+<li><strong>Create mapping directories</strong> for each group and partition, containing <code>mappings.json</code> and <code>globals.json</code> files.</li>
 </ol>
+<div class="highlight"><pre><span></span><code>mappings/
+└── experiment_name/
+    ├── mappings.cfg.json     # Experiment configuration and metadata
+    ├── globals.json          # Top-level globals
+    ├── group1/
+    │   └── 0/                # Partition value
+    │       ├── globals.json  # Partition globals
+    │       └── mappings.json # Actual mappings
+    └── group2/
+        └── 0/                # Partition value
+            ├── globals.json  # Partition globals
+            └── mappings.json # Actual mappings
+</code></pre></div>
+<p>I.e. for the <code>mappings.json</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;value_mapping&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data_source_mapping&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;map_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DATA_SOURCE&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;data_source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MyDataSource&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;signal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;coils&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>See <a href="schemas/globals/">globals</a> and <a href="schemas/mappings/">mappings</a> sections for details.</p>
+<ol>
+<li><strong>Validate your configuration</strong> using the TokaMap validator.</li>
+</ol>
+<p>You can validate your mappings using the <code>tokamap-validator</code> by running (assuming the directory structure above):</p>
+<div class="highlight"><pre><span></span><code>tokamap-validator<span class="w"> </span>mappings/
+</code></pre></div>
+<p>This will loop over the <code>mappings</code> directory looking for directories containing a <code>mappings.cfg.json</code> and validating each directory found.</p>
 <h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h2>
 <p>We appreciate any suggestions and contributions given using the GitHub issues tracker.</p>
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
