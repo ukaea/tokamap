@@ -1,11 +1,6 @@
 # TokaMap
 
-TokaMap is a JSON schema-based framework for mapping and structuring experimental data. It provides a standardized way to define how experimental measurements, calculations, and data transformations should be organized and validated.
-
-The Python package contains the following components:
-
-- [tokamap](python.md): A module that provides details about the install, such as the schemas directory.
-- [tokamap_validator](validator.md): A validation tool for ensuring consistency and correctness of mappings.
+TokaMap is a JSON schema-based framework for mapping experimental data. It provides a standardized way to define how experimental measurements, calculations, and data transformations should be organized and validated.
 
 ## Overview
 
@@ -19,6 +14,15 @@ TokaMap defines a set of JSON schemas that allow researchers and engineers to:
 
 Details of the schema structure can be found in the [schemas](schemas/schema.md) section.
 
+## Python library
+
+A Python package is available that installs the schemas alongside a few usage tools:
+
+- `tokamap`: A CLI that provides details about the install, such as the schemas directory.
+- `tokamap-validator`: A validation tool for ensuring consistency and correctness of mappings.
+
+More details about the provided library and tools can be found in the [python](python.md) section.
+
 ## Getting Started
 
 1. **Create a configuration file** (`mappings.cfg.json`) with your experiment metadata:
@@ -26,7 +30,7 @@ Details of the schema structure can be found in the [schemas](schemas/schema.md)
 ```json
 {
   "metadata": {
-    "experiment": "your_experiment_name",
+    "experiment": "experiment_name",
     "author": "Your Name",
     "version": "1.0.0"
   },
@@ -39,6 +43,8 @@ Details of the schema structure can be found in the [schemas](schemas/schema.md)
   "groups": ["group1", "group2"]
 }
 ```
+
+More details can be found in the [config](schemas/config.md) section.
 
 2. **Define global settings** in `globals.json`:
 
@@ -54,9 +60,51 @@ Details of the schema structure can be found in the [schemas](schemas/schema.md)
 }
 ```
 
-3. **Create mapping directories** for each group with their respective `mappings.json` and `globals.json` files.
+More details can be found in the [globals](schemas/globals.md) section.
+
+3. **Create mapping directories** for each group and partition, containing `mappings.json` and `globals.json` files.
+
+```
+mappings/
+└── experiment_name/
+    ├── mappings.cfg.json     # Experiment configuration and metadata
+    ├── globals.json          # Top-level globals
+    ├── group1/
+    │   └── 0/                # Partition value
+    │       ├── globals.json  # Partition globals
+    │       └── mappings.json # Actual mappings
+    └── group2/
+        └── 0/                # Partition value
+            ├── globals.json  # Partition globals
+            └── mappings.json # Actual mappings
+```
+
+I.e. for the `mappings.json`:
+
+```json
+{
+  "value_mapping": "value",
+  "data_source_mapping": {
+    "map_type": "DATA_SOURCE",
+    "data_source": "MyDataSource",
+    "args": {
+      "signal": "coils"
+    }
+  }
+}
+```
+
+See [globals](schemas/globals.md) and [mappings](schemas/mappings.md) sections for details.
 
 4. **Validate your configuration** using the TokaMap validator.
+
+You can validate your mappings using the `tokamap-validator` by running (assuming the directory structure above):
+
+```bash
+tokamap-validator mappings/
+```
+
+This will loop over the `mappings` directory looking for directories containing a `mappings.cfg.json` and validating each directory found.
 
 ## Contributing
 

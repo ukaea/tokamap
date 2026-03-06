@@ -39,9 +39,10 @@ nav:
   - Home: index.md
   - Schemas:
       - Schema: schemas/schema.md
-      - Mapping Types: schemas/mapping_types.md
-  - Validator: validator.md
-  - Library: python.md
+      - Config: schemas/config.md
+      - Globals: schemas/globals.md
+      - Mappings: schemas/mappings.md
+  - Python: python.md
 
 markdown_extensions:
   - admonition
