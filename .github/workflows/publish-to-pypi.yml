@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
@@ -48,7 +48,7 @@ jobs:
           unzip -l dist/*.whl | grep schemas || (echo "ERROR: Schema files not found in wheel!" && exit 1)
 
       - name: Store distribution packages
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: python-package-distributions
           path: dist/
@@ -61,14 +61,14 @@ jobs:
 
     environment:
       name: testpypi
-      url: https://test.pypi.org/project/tokamap-validator/
+      url: https://test.pypi.org/project/tokamap/
 
     permissions:
       id-token: write
 
     steps:
       - name: Download distributions
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: python-package-distributions
           path: dist/
@@ -87,14 +87,14 @@ jobs:
 
     environment:
       name: pypi
-      url: https://pypi.org/project/tokamap-validator/
+      url: https://pypi.org/project/tokamap/
 
     permissions:
       id-token: write
 
     steps:
       - name: Download distributions
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: python-package-distributions
           path: dist/
@@ -109,7 +109,7 @@ jobs:
 
     steps:
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
@@ -118,7 +118,7 @@ jobs:
 
       - name: Install from PyPI
         run: |
-          pip install tokamap-validator
+          pip install tokamap
 
       - name: Verify version command
         run: |
@@ -130,8 +130,8 @@ jobs:
 
       - name: Verify package can be imported
         run: |
-          python -c "import tokamap_validator; print('Package imported successfully')"
+          python -c "import tokamap; print('Package imported successfully')"
 
       - name: Verify schema files are accessible
         run: |
-          python -c "import os; import tokamap_validator; schema_dir = os.path.join(os.path.dirname(tokamap_validator.__file__), 'schemas'); print(f'Schema directory: {schema_dir}'); print(f'Exists: {os.path.exists(schema_dir)}'); print(f'Files: {os.listdir(schema_dir) if os.path.exists(schema_dir) else []}')"
+          python -c "import os; import tokamap; schema_dir = os.path.join(os.path.dirname(tokamap_validator.__file__), 'schemas'); print(f'Schema directory: {schema_dir}'); print(f'Exists: {os.path.exists(schema_dir)}'); print(f'Files: {os.listdir(schema_dir) if os.path.exists(schema_dir) else []}')"
