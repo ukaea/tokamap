@@ -26,6 +26,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+src/tokamap/_version.py
 
 # PyInstaller
 *.manifest
