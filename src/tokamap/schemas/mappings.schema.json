@@ -22,7 +22,8 @@
         { "$ref": "#/$defs/value" },
         { "$ref": "#/$defs/data_source" },
         { "$ref": "#/$defs/expression" },
-        { "$ref": "#/$defs/custom" }
+        { "$ref": "#/$defs/custom" },
+        { "$ref": "#/$defs/interp" }
       ]
     },
     "dimension": {
@@ -97,6 +98,26 @@
         "comment": { "type": "string" }
       },
       "required": ["map_type", "library", "function", "inputs", "parameters"],
+      "additionalProperties": false
+    },
+    "interp": {
+      "properties": {
+        "map_type": { "const": "INTERP" },
+        "data": { "type": "string" },
+        "base": { "type": "string" },
+        "target": { "type": "string" },
+        "type": { "type": "string" },
+        "args": {
+          "type": "object",
+          "patternProperties": {
+            "^.*$": {
+              "type": ["string", "boolean", "number"]
+            }
+          }
+        },
+        "comment": { "type": "string" }
+      },
+      "required": ["map_type", "data", "base", "target", "type"],
       "additionalProperties": false
     }
   }
