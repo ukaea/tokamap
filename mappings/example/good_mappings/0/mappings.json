@@ -51,7 +51,7 @@
     "input": "_interp_input",
     "base": "_interp_base",
     "target": "_interp_target",
-    "type": "linear",
+    "type": "LINEAR",
     "args": {},
     "comment": "Should yield [15,30,60]"
   }

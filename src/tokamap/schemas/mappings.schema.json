@@ -106,7 +106,7 @@
         "input": { "type": "string" },
         "base": { "type": "string" },
         "target": { "type": "string" },
-        "type": { "type": "string" },
+        "type": { "enum": ["LINEAR"] },
         "args": {
           "type": "object",
           "patternProperties": {
