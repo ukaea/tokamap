@@ -103,7 +103,7 @@
     "interp": {
       "properties": {
         "map_type": { "const": "INTERP" },
-        "data": { "type": "string" },
+        "input": { "type": "string" },
         "base": { "type": "string" },
         "target": { "type": "string" },
         "type": { "type": "string" },
@@ -117,7 +117,7 @@
         },
         "comment": { "type": "string" }
       },
-      "required": ["map_type", "data", "base", "target", "type"],
+      "required": ["map_type", "input", "base", "target", "type"],
       "additionalProperties": false
     }
   }

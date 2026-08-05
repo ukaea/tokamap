@@ -34,7 +34,7 @@
     },
     "parameters": {}
   },
-  "_interp_data": {
+  "_interp_input": {
     "map_type": "VALUE",
     "value": [10, 20, 40, 80]
   },
@@ -48,7 +48,7 @@
   },
   "interp_mapping": {
     "map_type": "INTERP",
-    "data": "_interp_input",
+    "input": "_interp_input",
     "base": "_interp_base",
     "target": "_interp_target",
     "type": "linear",
