@@ -34,6 +34,8 @@ def validate_mappings(mappings):
                 validation_errors += validate_expr_mapping(path, mapping, mappings)
             case "CUSTOM":
                 validation_errors += validate_custom_mapping(path, mapping, mappings)
+            case "INTERP":
+                validation_errors += validate_interp_mapping(path, mapping, mappings)
             case _:
                 validation_errors.append(
                     ValidationError(f"unknown map_type '{map_type}'", mapping)
@@ -93,6 +95,9 @@ def validate_custom_mapping(path, mapping, mappings):
             )
     return validation_errors
 
+def validate_interp_mapping(_path, _mapping, _mappings):
+    validation_errors = []
+    return validation_errors
 
 class Validator:
     def __init__(self, schema_file):

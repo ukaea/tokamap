@@ -33,5 +33,26 @@
       "rhs": "data_source_mapping"
     },
     "parameters": {}
+  },
+  "_interp_input": {
+    "map_type": "VALUE",
+    "value": [10, 20, 40, 80]
+  },
+  "_interp_base": {
+    "map_type": "VALUE",
+    "value": [0, 1, 2, 3]
+  },
+  "_interp_target": {
+    "map_type": "VALUE",
+    "value": [0.5, 1.5, 2.5]
+  },
+  "interp_mapping": {
+    "map_type": "INTERP",
+    "input": "_interp_input",
+    "base": "_interp_base",
+    "target": "_interp_target",
+    "type": "LINEAR",
+    "args": {},
+    "comment": "Should yield [15,30,60]"
   }
 }
