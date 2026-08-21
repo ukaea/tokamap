@@ -136,4 +136,4 @@ jobs:
 
       - name: Verify schema files are accessible
         run: |
-          python -c "import os; import tokamap; schema_dir = os.path.join(os.path.dirname(tokamap_validator.__file__), 'schemas'); print(f'Schema directory: {schema_dir}'); print(f'Exists: {os.path.exists(schema_dir)}'); print(f'Files: {os.listdir(schema_dir) if os.path.exists(schema_dir) else []}')"
+          python -c "import os; import tokamap; schema_dir = tokamap.schemas_dir(); print(f'Schema directory: {schema_dir}'); print(f'Exists: {schema_dir.exists()}'); print(f'Files: {list(f.name for f in schema_dir.iterdir())}')"
