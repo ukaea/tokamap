@@ -39,9 +39,10 @@ def validate_partitions(
         subdirs = [i for i in os.listdir(directory) if (directory / i).is_dir()]
         if not subdirs:
             print(
-                f"Expected directories for partition '{partition}' in mapping '{directory}'."
+                f"Expected directories for partition '{partition}' in mapping '{directory}'.",
+                file=sys.stderr,
             )
-            exit(1)
+            sys.exit(1)
 
         for subdir in subdirs:
             validate &= validate_partitions(
@@ -97,13 +98,13 @@ def run():
 
     root = Path(args.directory)
     if not root.is_dir():
-        print(f"Argument '{args.directory}' is not a directory.")
-        return
+        print(f"Argument '{args.directory}' is not a directory.", file=sys.stderr)
+        return 1
 
     config_file = root / "mappings.cfg.json"
     if not config_file.exists():
-        print(f"Configuration file '{config_file}' does not exist.")
-        return
+        print(f"Configuration file '{config_file}' does not exist.", file=sys.stderr)
+        return 1
 
     validate = True
 
@@ -120,8 +121,8 @@ def run():
 
     toplevel_globals = root / "globals.json"
     if not toplevel_globals.exists():
-        print(f"Root level globals file '{toplevel_globals}' does not exist.")
-        return
+        print(f"Root level globals file '{toplevel_globals}' does not exist.", file=sys.stderr)
+        return 1
 
     if args.verbose:
         print("Validating top-level globals ... ", end="")
@@ -137,8 +138,8 @@ def run():
     for mapping in mappings:
         mapping_dir = root / mapping
         if not mapping_dir.exists():
-            print(f"Mapping '{mapping}' does not exist.")
-            exit(1)
+            print(f"Mapping '{mapping}' does not exist.", file=sys.stderr)
+            return 1
 
         validate &= validate_partitions(
             mapping_dir, partitions, mappings_validator, globals_validator, args
@@ -146,5 +147,7 @@ def run():
 
     if validate:
         print("Validation completed successfully.")
-    else:
-        print("Validation failed.")
+        return 0
+
+    print("Validation failed.", file=sys.stderr)
+    return 1
