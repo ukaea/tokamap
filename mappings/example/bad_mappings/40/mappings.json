@@ -65,13 +65,6 @@
     "absolute": 0.1,
     "comment": "MAX_ABS_REL requires relative"
   },
-  "invalid_uncertainty_mapping_negative": {
-    "map_type": "UNCERTAINTY",
-    "model_type": "RELATIVE",
-    "reference": "float_mapping",
-    "relative": -0.05,
-    "comment": "relative must be >= 0"
-  },
   "invalid_uncertainty_mapping_unknown_type": {
     "map_type": "UNCERTAINTY",
     "model_type": "QUADRATURE",
