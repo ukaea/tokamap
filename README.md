@@ -108,7 +108,7 @@ The TokaMap system consists of three main schema components:
 Defines the top-level configuration structure including:
 
 - **Metadata**: Experiment information, author, and version
-- **Partitions**: Data partitioning rules with selectors (max_below, min_above, exact, closest)
+- **Partitions**: Data partitioning rules with selectors (`MAX_BELOW`, `MIN_ABOVE`, `EXACT`, `CLOSEST`)
 - **Groups**: Array of group identifiers
 
 ### 2. Globals Schema (`globals.schema.json`)

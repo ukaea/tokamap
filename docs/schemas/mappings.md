@@ -137,6 +137,48 @@ Use an external data source to read the values to return.
 - `expr`: A mathematical expression to evaluate.
 - `parameters`: A dictionary of parameters to pass into the expression.
 
+### Uncertainty Mapping
+
+Takes a reference signal and generates an uncertainty for each point and returns. The result has the same shape as the reference.
+
+```json
+{
+  "map_type": "UNCERTAINTY",
+  "model_type": "ABSOLUTE",
+  "reference": "mapping_name",
+  "absolute": 0.01,
+  "comment": "Optional description"
+}
+{
+  "map_type": "UNCERTAINTY",
+  "model_type": "RELATIVE",
+  "reference": "mapping_name",
+  "relative": 0.01,
+  "comment": "Optional description"
+}
+{
+  "map_type": "UNCERTAINTY",
+  "model_type": "MAX_ABS_REL",
+  "reference": "mapping_name",
+  "absolute": 0.01,
+  "relative": 0.05,
+  "comment": "Optional description"
+}
+```
+
+**Parameters**:
+
+- `model_type`: How the uncertainty is calculated, one of:
+    - `ABSOLUTE`: `absolute` at every point (requires `absolute`).
+    - `RELATIVE`: `relative * |x|` (requires `relative`).
+    - `MAX_ABS_REL`: `max(absolute, relative * |x|)` (requires both `absolute` and `relative`).
+- `reference`: The name of the mapping to calculate the uncertainty for.
+- `absolute`: Absolute uncertainty, in the units of the reference (>= 0).
+- `relative`: Relative uncertainty as a fraction, eg. `0.05` for 5% (>= 0).
+# Note, may want to change this to percentage uncertainty at some point.
+
+Parameters not used by the chosen `model_type` are not allowed, all checks are enforced by the schemas.
+
 ### Custom Function Mapping
 
 If functionality is required that can be handled by any of the other mapping types then you can offload to a custom 
