@@ -55,23 +55,23 @@
     "args": {},
     "comment": "Should yield [15,30,60]"
   },
-  "absolute_error_mapping": {
-    "map_type": "ERROR",
-    "error_type": "ABSOLUTE",
+  "absolute_uncertainty_mapping": {
+    "map_type": "UNCERTAINTY",
+    "model_type": "ABSOLUTE",
     "reference": "_interp_input",
     "absolute": 3.0,
     "comment": "Should yield [3,3,3,3]"
   },
-  "relative_error_mapping": {
-    "map_type": "ERROR",
-    "error_type": "RELATIVE",
+  "relative_uncertainty_mapping": {
+    "map_type": "UNCERTAINTY",
+    "model_type": "RELATIVE",
     "reference": "_interp_input",
     "relative": 0.1,
     "comment": "Should yield [1,2,4,8]"
   },
-  "max_abs_rel_error_mapping": {
-    "map_type": "ERROR",
-    "error_type": "MAX_ABS_REL",
+  "max_abs_rel_uncertainty_mapping": {
+    "map_type": "UNCERTAINTY",
+    "model_type": "MAX_ABS_REL",
     "reference": "_interp_input",
     "absolute": 3.0,
     "relative": 0.1,

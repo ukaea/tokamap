@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "/schemas/toplevel",
-  "description": "JSON Schema for v1.0 of mappings",
+  "description": "JSON Schema for v1.1 of mappings",
   "type": "object",
   "patternProperties": {
     "^.*$": {
@@ -24,7 +24,7 @@
         { "$ref": "#/$defs/expression" },
         { "$ref": "#/$defs/custom" },
         { "$ref": "#/$defs/interp" },
-        { "$ref": "#/$defs/error" }
+        { "$ref": "#/$defs/uncertainty" }
       ]
     },
     "dimension": {
@@ -121,22 +121,22 @@
       "required": ["map_type", "input", "base", "target", "type"],
       "additionalProperties": false
     },
-    "error": {
+    "uncertainty": {
       "properties": {
-        "map_type": { "const": "ERROR" },
-        "error_type": { "enum": ["ABSOLUTE", "RELATIVE", "MAX_ABS_REL"] },
+        "map_type": { "const": "UNCERTAINTY" },
+        "model_type": { "enum": ["ABSOLUTE", "RELATIVE", "MAX_ABS_REL"] },
         "reference": { "type": "string" },
         "absolute": { "type": "number", "minimum": 0 },
         "relative": { "type": "number", "minimum": 0 },
         "comment": { "type": "string" }
       },
-      "required": ["map_type", "error_type", "reference"],
+      "required": ["map_type", "model_type", "reference"],
       "additionalProperties": false,
       "allOf": [
         {
           "if": {
             "properties": {
-              "error_type": { "const": "ABSOLUTE" }
+              "model_type": { "const": "ABSOLUTE" }
             }
           },
           "then": {
@@ -147,7 +147,7 @@
         {
           "if": {
             "properties": {
-              "error_type": { "const": "RELATIVE" }
+              "model_type": { "const": "RELATIVE" }
             }
           },
           "then": {
@@ -157,7 +157,7 @@
         {
           "if": {
             "properties": {
-              "error_type": { "const": "MAX_ABS_REL" }
+              "model_type": { "const": "MAX_ABS_REL" }
             }
           },
           "then": {

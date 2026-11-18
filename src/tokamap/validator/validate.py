@@ -38,8 +38,8 @@ def validate_mappings(mappings, skip=()):
                 validation_errors += validate_custom_mapping(path, mapping, mappings)
             case "INTERP":
                 validation_errors += validate_interp_mapping(path, mapping, mappings)
-            case "ERROR":
-                validation_errors += validate_error_mapping(path, mapping, mappings)
+            case "UNCERTAINTY":
+                validation_errors += validate_uncertainty_mapping(path, mapping, mappings)
             case _:
                 validation_errors.append(
                     ValidationError(f"unknown map_type '{map_type}'", mapping)
@@ -105,7 +105,7 @@ def validate_interp_mapping(_path, _mapping, _mappings):
     return validation_errors
 
 
-def validate_error_mapping(path, mapping, mappings):
+def validate_uncertainty_mapping(path, mapping, mappings):
     validation_errors = []
     reference = mapping["reference"]
     if reference not in mappings:
