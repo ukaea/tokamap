@@ -126,8 +126,8 @@
         "map_type": { "const": "UNCERTAINTY" },
         "model_type": { "enum": ["ABSOLUTE", "RELATIVE", "MAX_ABS_REL"] },
         "reference": { "type": "string" },
-        "absolute": { "type": "number" },
-        "relative": { "type": "number" },
+        "absolute": { "type": ["string", "number"], "minimum": 0 },
+        "relative": { "type": ["string", "number"], "minimum": 0 },
         "comment": { "type": "string" }
       },
       "required": ["map_type", "model_type", "reference"],

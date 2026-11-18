@@ -76,5 +76,12 @@
     "absolute": 3.0,
     "relative": 0.1,
     "comment": "Should yield [3,3,4,8]"
+  },
+  "templated_uncertainty_mapping": {
+    "map_type": "UNCERTAINTY",
+    "model_type": "ABSOLUTE",
+    "reference": "_interp_input",
+    "absolute": "{{ absolute_uncertainty }}",
+    "comment": "absolute is rendered from a template string"
   }
 }
