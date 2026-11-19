@@ -64,7 +64,8 @@ markdown_extensions:
 plugins:
   - search
   - mkdocstrings
-  - mike
+  - mike:
+      alias_type: copy
 
 extra:
   version:

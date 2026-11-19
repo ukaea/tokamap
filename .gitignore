@@ -27,6 +27,7 @@ share/python-wheels/
 *.egg
 MANIFEST
 src/tokamap/_version.py
+src/tokamap/_generated_schemas/
 
 # PyInstaller
 *.manifest
@@ -114,6 +115,9 @@ venv.bak/
 
 # mkdocs documentation
 /site
+/docs/schemas/[0-9]*/
+/docs/schemas/v[0-9]*/
+/docs/schemas/develop/
 
 # mypy
 .mypy_cache/

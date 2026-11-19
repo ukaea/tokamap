@@ -1,17 +1,22 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/schemas/toplevel",
-  "description": "JSON Schema for v1.0 of mappings",
+  "description": "JSON Schema for TokaMap mapping files",
   "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "Format version this file follows: any base URL or path ending in /<version>/mappings.schema.json",
+      "type": "string",
+      "pattern": "/v?[0-9]+\\.[0-9]+(?:\\.[0-9]+)?(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?/mappings\\.schema\\.json$"
+    }
+  },
   "patternProperties": {
-    "^.*$": {
+    "^[^$]": {
       "oneOf": [
         { "type": "string" },
         { "type": "number" },
         { "$ref": "#/$defs/map_type" }
       ]
-    },
-    "additionalProperties": false
+    }
   },
   "additionalProperties": false,
   "$defs": {

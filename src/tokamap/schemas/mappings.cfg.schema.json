@@ -1,10 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/schemas/toplevel",
-  "description": "JSON Schema for v1.0 of default top-level globals",
+  "description": "JSON Schema for TokaMap configuration files",
   "type": "object",
   "required": ["metadata", "partitions", "groups"],
   "properties": {
+    "$schema": {
+      "description": "Format version this file follows: any base URL or path ending in /<version>/mappings.cfg.schema.json",
+      "type": "string",
+      "pattern": "/v?[0-9]+\\.[0-9]+(?:\\.[0-9]+)?(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?/mappings\\.cfg\\.schema\\.json$"
+    },
     "metadata": {
       "$ref": "#/$defs/metadata"
     },

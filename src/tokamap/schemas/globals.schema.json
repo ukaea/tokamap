@@ -1,9 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "/schemas/toplevel",
-  "description": "JSON Schema for v1.0 of mapping globals",
+  "description": "JSON Schema for TokaMap globals files",
   "type": "object",
   "properties": {
+    "$schema": {
+      "description": "Format version this file follows: any base URL or path ending in /<version>/globals.schema.json",
+      "type": "string",
+      "pattern": "/v?[0-9]+\\.[0-9]+(?:\\.[0-9]+)?(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?/globals\\.schema\\.json$"
+    },
     "data_source_config": {
       "type": "object",
       "patternProperties": {

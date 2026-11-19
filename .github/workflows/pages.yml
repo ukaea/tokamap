@@ -4,8 +4,15 @@ on:
   push:
     branches:
       - develop
-    tags:
-      - "*"
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -13,24 +20,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-        # need git tags available to get git version
+        # Include the published docs branch so older schema versions can be kept.
         with:
           fetch-depth: 0
           fetch-tags: true
-
-      - name: Git Version
-        id: version
-        run: |
-          GIT_VERSION=$(git describe --tags --abbrev=0)
-          GIT_LONG_VERSION=$(git describe --tags --long)
-          DISTANCE=${GIT_LONG_VERSION#*-}
-          DISTANCE=${DISTANCE%%-*}
-          GIT_COMMIT_EMAIL=$(git log -1 --format='%ae')
-          GIT_COMMIT_NAME=$(git log -1 --format='%an')
-          echo "version=$GIT_VERSION" >> $GITHUB_OUTPUT
-          echo "long_version=${GIT_VERSION}.${DISTANCE}" >> $GITHUB_OUTPUT
-          echo "commit_email=$GIT_COMMIT_EMAIL" >> $GITHUB_OUTPUT
-          echo "commit_name=$GIT_COMMIT_NAME" >> $GITHUB_OUTPUT
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -40,14 +33,37 @@ jobs:
       - name: Install Dependencies
         run: pip install mkdocs mkdocs-material mkdocstrings mike
 
+      - name: Prepare schema downloads
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = release ]; then
+            version_args=(--version "$RELEASE_TAG")
+          else
+            version_args=(--develop)
+          fi
+          if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
+            python scripts/prepare_schemas.py --docs "${version_args[@]}" --published-ref origin/gh-pages
+          else
+            python scripts/prepare_schemas.py --docs "${version_args[@]}"
+          fi
+
       - name: Setup Deploy
         run: |
-          git config --global user.name ${{ steps.version.outputs.commit_name }}
-          git config --global user.email ${{ steps.version.outputs.commit_email }}
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
       - name: Deploy Live Documentation
-        if: startsWith(github.ref, 'refs/tags/')
-        run: mike deploy --push --update-aliases ${{ steps.version.outputs.version }} latest
+        if: github.event_name == 'release' && !github.event.release.prerelease
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: mike deploy --push --update-aliases "$RELEASE_TAG" latest
+
+      - name: Deploy Prerelease Documentation
+        if: github.event_name == 'release' && github.event.release.prerelease
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: mike deploy --push "$RELEASE_TAG"
 
       - name: Deploy Development Documentation
         if: startsWith(github.ref, 'refs/heads/develop')

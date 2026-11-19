@@ -34,6 +34,9 @@ jobs:
           pip install build twine
 
       - name: Build package
+        env:
+          TOKAMAP_SCHEMA_VERSION: ${{ github.event.release.tag_name || (github.ref_type == 'tag' && github.ref_name) || '' }}
+          TOKAMAP_SCHEMA_DEVELOP: ${{ github.ref_type == 'branch' && '1' || '' }}
         run: python -m build
 
       - name: Check package

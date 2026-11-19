@@ -1,3 +1,8 @@
 include README.md
 include LICENSE
 include src/tokamap/schemas/*.json
+include setup.py
+include scripts/__init__.py
+include scripts/prepare_schemas.py
+exclude .schema-version.json
+recursive-exclude src/tokamap/_generated_schemas *

@@ -22,4 +22,6 @@ def schemas_dir():
     """Return the directory containing the schemas"""
     from pathlib import Path
 
-    return Path(__file__).parent / "schemas"
+    package_dir = Path(__file__).parent
+    generated = package_dir / "_generated_schemas"
+    return generated if generated.is_dir() else package_dir / "schemas"

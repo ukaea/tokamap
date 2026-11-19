@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0", "setuptools_scm[toml]>=8"]
+requires = ["setuptools>=64.0", "setuptools_scm[toml]>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -46,6 +46,7 @@ tokamap-validator = "tokamap.validator.main:run"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+exclude = ["tokamap._generated_schemas*"]
 
 [tool.setuptools.package-data]
 "tokamap" = ["schemas/*.json"]

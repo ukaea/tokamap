@@ -1,0 +1,32 @@
+name: Publish schemas
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Upload JSON schemas to release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Render versioned schemas
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: python scripts/prepare_schemas.py --version "$RELEASE_TAG"
+
+      - name: Upload schemas
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$RELEASE_TAG" build/schemas/*.schema.json --clobber
