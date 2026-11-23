@@ -7,8 +7,13 @@ from pathlib import Path
 from .. import __version__, schemas_dir
 from .validate import Validator
 
+# in a group passed to --expect-invalid, mappings with this prefix must fail validation
+INVALID_PREFIX = "invalid_"
 
-def validate_mapping(mapping_dir, mappings_validator, globals_validator, verbose):
+
+def validate_mapping(
+    mapping_dir, mappings_validator, globals_validator, verbose, expect_invalid
+):
     validate = True
     if verbose:
         print("Validating globals.json ...", end="", flush=True)
@@ -20,28 +25,32 @@ def validate_mapping(mapping_dir, mappings_validator, globals_validator, verbose
         print("Validating mappings.json ...", end="", flush=True)
     mappings_file = mapping_dir / "mappings.json"
     errors = mappings_validator.validate(mappings_file)
-    validate &= check_result(mappings_file, errors, verbose)
+    if expect_invalid:
+        validate &= check_expected_result(mappings_file, errors, verbose)
+    else:
+        validate &= check_result(mappings_file, errors, verbose)
     return validate
 
 
 def validate_partitions(
-    directory, partitions, mappings_validator, globals_validator, args
+    directory, partitions, mappings_validator, globals_validator, args, expect_invalid
 ):
     validate = True
     if len(partitions) == 0:
         if args.verbose:
             print(f"Validating mapping '{directory}'")
         validate &= validate_mapping(
-            directory, mappings_validator, globals_validator, args.verbose
+            directory, mappings_validator, globals_validator, args.verbose, expect_invalid
         )
     else:
         partition = partitions[0]
         subdirs = [i for i in os.listdir(directory) if (directory / i).is_dir()]
         if not subdirs:
             print(
-                f"Expected directories for partition '{partition}' in mapping '{directory}'."
+                f"Expected directories for partition '{partition}' in mapping '{directory}'.",
+                file=sys.stderr,
             )
-            exit(1)
+            sys.exit(1)
 
         for subdir in subdirs:
             validate &= validate_partitions(
@@ -50,6 +59,7 @@ def validate_partitions(
                 mappings_validator,
                 globals_validator,
                 args,
+                expect_invalid,
             )
 
     return validate
@@ -79,6 +89,36 @@ def check_result(file_path, errors, verbose):
     return True
 
 
+def check_expected_result(file_path, errors, verbose):
+    """
+    Mappings named invalid_* must fail validation, every other mapping must pass
+    """
+    with open(file_path, "r") as f:
+        names = json.load(f).keys()
+
+    expected = {name for name in names if name.startswith(INVALID_PREFIX)}
+    failed = {error.path for error in errors}
+
+    missed = sorted(expected - failed)
+    unexpected = [error for error in errors if error.path not in expected]
+
+    if not missed and not unexpected:
+        if verbose:
+            print(f"ok ({len(expected)} expected failures)")
+        return True
+
+    if verbose:
+        print("error")
+    for name in missed:
+        print(
+            f"Expected to fail validation but passed: {file_path} [{name}]",
+            file=sys.stderr,
+        )
+    for error in unexpected:
+        print_error(file_path, error, verbose)
+    return False
+
+
 def run():
     parser = argparse.ArgumentParser(description="Validate a TokaMap mapping directory")
     parser.add_argument(
@@ -86,6 +126,16 @@ def run():
     )
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="Enable verbose output"
+    )
+    parser.add_argument(
+        "--expect-invalid",
+        action="append",
+        default=[],
+        metavar="GROUP",
+        help=(
+            f"In this group, mappings named '{INVALID_PREFIX}*' must fail validation and "
+            "all others must pass (can be given more than once)"
+        ),
     )
     parser.add_argument("directory", help="TokaMap mapping directory to validate")
     args = parser.parse_args()
@@ -97,13 +147,13 @@ def run():
 
     root = Path(args.directory)
     if not root.is_dir():
-        print(f"Argument '{args.directory}' is not a directory.")
-        return
+        print(f"Argument '{args.directory}' is not a directory.", file=sys.stderr)
+        return 1
 
     config_file = root / "mappings.cfg.json"
     if not config_file.exists():
-        print(f"Configuration file '{config_file}' does not exist.")
-        return
+        print(f"Configuration file '{config_file}' does not exist.", file=sys.stderr)
+        return 1
 
     validate = True
 
@@ -120,8 +170,8 @@ def run():
 
     toplevel_globals = root / "globals.json"
     if not toplevel_globals.exists():
-        print(f"Root level globals file '{toplevel_globals}' does not exist.")
-        return
+        print(f"Root level globals file '{toplevel_globals}' does not exist.", file=sys.stderr)
+        return 1
 
     if args.verbose:
         print("Validating top-level globals ... ", end="")
@@ -131,20 +181,33 @@ def run():
     partitions = config["partitions"]
     mappings = config["groups"]
 
+    # catch typos rather than silently validating the group normally
+    unknown = [group for group in args.expect_invalid if group not in mappings]
+    if unknown:
+        print(f"--expect-invalid groups not found in '{config_file}': {unknown}", file=sys.stderr)
+        return 1
+
     if args.verbose:
         print(f"Mappings found: {mappings}")
 
     for mapping in mappings:
         mapping_dir = root / mapping
         if not mapping_dir.exists():
-            print(f"Mapping '{mapping}' does not exist.")
-            exit(1)
+            print(f"Mapping '{mapping}' does not exist.", file=sys.stderr)
+            return 1
 
         validate &= validate_partitions(
-            mapping_dir, partitions, mappings_validator, globals_validator, args
+            mapping_dir,
+            partitions,
+            mappings_validator,
+            globals_validator,
+            args,
+            mapping in args.expect_invalid,
         )
 
     if validate:
         print("Validation completed successfully.")
-    else:
-        print("Validation failed.")
+        return 0
+
+    print("Validation failed.", file=sys.stderr)
+    return 1

@@ -1,0 +1,25 @@
+name: Validate example mappings to JSON schemas
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  validate-examples:
+    name: Validate example mappings
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install tokamap
+        run: pip install .
+
+      - name: Run validator on examples
+        run: tokamap-validator -v mappings/example --expect-invalid bad_mappings

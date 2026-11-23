@@ -13,9 +13,11 @@ class ValidationError:
         self.errors.append(error_message)
 
 
-def validate_mappings(mappings):
+def validate_mappings(mappings, skip=()):
     validation_errors = []
     for path, mapping in mappings.items():
+        if path in skip:
+            continue
         try:
             map_type = mapping["map_type"]
         except (TypeError, KeyError):
@@ -36,6 +38,8 @@ def validate_mappings(mappings):
                 validation_errors += validate_custom_mapping(path, mapping, mappings)
             case "INTERP":
                 validation_errors += validate_interp_mapping(path, mapping, mappings)
+            case "UNCERTAINTY":
+                validation_errors += validate_uncertainty_mapping(path, mapping, mappings)
             case _:
                 validation_errors.append(
                     ValidationError(f"unknown map_type '{map_type}'", mapping)
@@ -95,9 +99,23 @@ def validate_custom_mapping(path, mapping, mappings):
             )
     return validation_errors
 
+
 def validate_interp_mapping(_path, _mapping, _mappings):
     validation_errors = []
     return validation_errors
+
+
+def validate_uncertainty_mapping(path, mapping, mappings):
+    validation_errors = []
+    reference = mapping["reference"]
+    if reference not in mappings:
+        validation_errors.append(
+            ValidationError(
+                path, mapping, [f"reference '{reference}' not found in mappings"]
+            )
+        )
+    return validation_errors
+
 
 class Validator:
     def __init__(self, schema_file):
@@ -121,9 +139,9 @@ class Validator:
 
         with open(mappings_file, "r") as f:
             mappings = json.load(f)
-            try:
-                jsonschema.validate(mappings, self.schema)
-            except jsonschema.ValidationError as e:
+            # report every schema error, not just the first
+            schema_validator = jsonschema.validators.validator_for(self.schema)(self.schema)
+            for e in schema_validator.iter_errors(mappings):
                 error = ValidationError(e.absolute_path.pop(), e.instance)
                 if "map_type" not in e.instance:
                     error.add_error("'map_type' not defined")
@@ -141,8 +159,8 @@ class Validator:
                                     error.add_error(f"{context.message}")
                 validation_errors.append(error)
 
-            if len(validation_errors) == 0:
-                # if mappings validate against schema, run additional validation steps
-                validation_errors += validate_mappings(mappings)
+            # additional validation steps, skipping mappings that already failed the schema
+            failed = {error.path for error in validation_errors}
+            validation_errors += validate_mappings(mappings, skip=failed)
 
         return validation_errors

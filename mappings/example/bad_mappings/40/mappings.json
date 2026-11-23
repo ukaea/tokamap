@@ -49,5 +49,41 @@
     "parameters": {
       "r": "does_not_exist"
     }
+  },
+  "invalid_uncertainty_mapping_unused_parameter": {
+    "map_type": "UNCERTAINTY",
+    "model_type": "ABSOLUTE",
+    "reference": "float_mapping",
+    "absolute": 0.1,
+    "relative": 0.05,
+    "comment": "relative not allowed for ABSOLUTE"
+  },
+  "invalid_uncertainty_mapping_missing_parameter": {
+    "map_type": "UNCERTAINTY",
+    "model_type": "MAX_ABS_REL",
+    "reference": "float_mapping",
+    "absolute": 0.1,
+    "comment": "MAX_ABS_REL requires relative"
+  },
+  "invalid_uncertainty_mapping_negative": {
+    "map_type": "UNCERTAINTY",
+    "model_type": "RELATIVE",
+    "reference": "float_mapping",
+    "relative": -0.05,
+    "comment": "relative must be >= 0"
+  },
+  "invalid_uncertainty_mapping_unknown_type": {
+    "map_type": "UNCERTAINTY",
+    "model_type": "QUADRATURE",
+    "reference": "float_mapping",
+    "absolute": 0.1,
+    "comment": "model_type not in enum"
+  },
+  "invalid_uncertainty_mapping_reference": {
+    "map_type": "UNCERTAINTY",
+    "model_type": "ABSOLUTE",
+    "reference": "does_not_exist",
+    "absolute": 0.1,
+    "comment": "reference not found in mappings"
   }
 }
