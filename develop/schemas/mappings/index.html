@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/logo.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
     
     
       
@@ -27,10 +27,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -627,10 +627,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-function-mapping" class="md-nav__link">
+  <a href="#uncertainty-mapping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Custom Function Mapping
+        Uncertainty Mapping
       
     </span>
   </a>
@@ -779,10 +779,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-function-mapping" class="md-nav__link">
+  <a href="#uncertainty-mapping" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Custom Function Mapping
+        Uncertainty Mapping
       
     </span>
   </a>
@@ -921,6 +921,45 @@ of the mapping as JSON does not support comments.</p>
 <li><code>expr</code>: A mathematical expression to evaluate.</li>
 <li><code>parameters</code>: A dictionary of parameters to pass into the expression.</li>
 </ul>
+<h3 id="uncertainty-mapping">Uncertainty Mapping<a class="headerlink" href="#uncertainty-mapping" title="Permanent link">&para;</a></h3>
+<p>Takes a reference signal and generates an uncertainty for each point and returns. The result has the same shape as the reference.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"map_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCERTAINTY"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"model_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABSOLUTE"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mapping_name"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"absolute"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Optional description"</span>
+<span class="p">}</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">"map_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCERTAINTY"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"model_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RELATIVE"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mapping_name"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"relative"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Optional description"</span>
+<span class="p">}</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">"map_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNCERTAINTY"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"model_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MAX_ABS_REL"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mapping_name"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"absolute"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"relative"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Optional description"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>model_type</code>: How the uncertainty is calculated, one of:<ul>
+<li><code>ABSOLUTE</code>: <code>absolute</code> at every point (requires <code>absolute</code>).</li>
+<li><code>RELATIVE</code>: <code>relative * |x|</code> (requires <code>relative</code>).</li>
+<li><code>MAX_ABS_REL</code>: <code>max(absolute, relative * |x|)</code> (requires both <code>absolute</code> and <code>relative</code>).</li>
+</ul>
+</li>
+<li><code>reference</code>: The name of the mapping to calculate the uncertainty for.</li>
+<li><code>absolute</code>: Absolute uncertainty, in the units of the reference (&gt;= 0).</li>
+<li><code>relative</code>: Relative uncertainty as a fraction, eg. <code>0.05</code> for 5% (&gt;= 0).</li>
+</ul>
+<h1 id="note-may-want-to-change-this-to-percentage-uncertainty-at-some-point">Note, may want to change this to percentage uncertainty at some point.<a class="headerlink" href="#note-may-want-to-change-this-to-percentage-uncertainty-at-some-point" title="Permanent link">&para;</a></h1>
+<p>Parameters not used by the chosen <code>model_type</code> are not allowed, all checks are enforced by the schemas.</p>
 <h3 id="custom-function-mapping">Custom Function Mapping<a class="headerlink" href="#custom-function-mapping" title="Permanent link">&para;</a></h3>
 <p>If functionality is required that can be handled by any of the other mapping types then you can offload to a custom 
 function that you expect to be available to run your mappings.</p>
@@ -997,10 +1036,10 @@ issue to request a new mapping type or extension to the current ones.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>
